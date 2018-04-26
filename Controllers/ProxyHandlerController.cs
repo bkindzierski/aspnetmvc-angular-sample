@@ -24,7 +24,7 @@ using aspnetmvc_angular_sample.Models;
 
 namespace aspnetmvc_angular_sample.Controllers
 {
-	
+	//my .github erpo
 	//public class ProxyHandlerController : DelegatingHandler
 	public class ProxyHandlerController : Controller
 	{
@@ -66,7 +66,7 @@ namespace aspnetmvc_angular_sample.Controllers
 				request.Method = "GET";
 				request.ContentType = "application/json";
 				request.Headers.Add("Authorization", token);
-
+				
 				//dynamic obj
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				StreamReader reader = new StreamReader(response.GetResponseStream());
