@@ -24,6 +24,7 @@ export class AuthService {
 
 	// middelware URL
 	//_url: string = 'http://dev-net-brn.mig.local:8081/api/BusinessClass';
+	//goes to ProxyHandler Class
 	_url: string = 'http://dev-net-brn.mig.local:8081/api/';
 
 
