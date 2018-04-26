@@ -73,7 +73,7 @@ export class AppComponent {
 
 	}
 
-	// **
+	// ** ** BDK
 	classInfoByid: DWXF7BusinessClass[];
 	public getBusinessClassID(id: number) {
 
