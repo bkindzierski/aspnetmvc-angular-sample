@@ -18,7 +18,7 @@ export class AuthService {
 	authKey: string = "auth";
 	//clientId: string = "MigTokenTest";
 	//_url: string = 'http://dev-net-brn.MIG.local/MigAuthService/api/AuthTokenTest';
-	
+
 	//behind firewall URL
 	//_url: string = 'http://dev-net-brn.MIG.local/MigAuthService/api/BusinessClass';
 
@@ -31,7 +31,7 @@ export class AuthService {
 	constructor(private _http: HttpClient,
 		@Inject(PLATFORM_ID) private platformId: any) {
 	}
-	
+
 
 	// performs the logout
 	logout(): boolean {
@@ -41,13 +41,13 @@ export class AuthService {
 
 	// Persist auth into localStorage or removes it if a NULL argument is given
 	setAuth(auth: TokenReponse | null): boolean {
-		
+
 		if (isPlatformBrowser(this.platformId)) {
 			if (auth) {
 				//console.log('auth data: ' + auth.token);
 				localStorage.setItem(
-				this.authKey,
-				JSON.stringify(auth));
+					this.authKey,
+					JSON.stringify(auth));
 			}
 			else {
 				localStorage.removeItem(this.authKey);
@@ -61,7 +61,7 @@ export class AuthService {
 
 		//console.log('getAuth()....');
 		if (isPlatformBrowser(this.platformId)) {
-			
+
 			var i = localStorage.getItem(this.authKey);
 			//console.log('local storage get item: ' + i);
 			if (i) {
@@ -80,21 +80,67 @@ export class AuthService {
 		return false;
 	}
 
+	parseJwt(token) {
+		//var base64Url = token[1];
+		console.log("token:" + token);
+		var base64Url = (<string>token).split('.')[1];
+		// console.log(base64Url);
+		var base64 = base64Url.replace('-', '+').replace('_', '/');
+		//  console.log("final:"+base64);
+		return JSON.parse(window.atob(base64));
+	};
 
+	public isInRole(guardRoles: Array<string>): boolean {
+		let result: boolean = false;
+		let token = this.getAuth();
+		let parseToken = this.parseJwt(token)
+
+		let roles = token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
+		if (guardRoles.some(function (v) {
+			// console.log("Roles:"+ v);
+			if (roles.indexOf(v) >= 0) {
+				return true;
+			}
+		})) {
+			result = true;
+		}
+
+		//
+		return result;
+
+		
+		// this.tokenStorage.getAccessToken().subscribe(data => {
+		// 	// console.log("testtoken"+data)
+		// 	let token = this.parseJwt(data);
+
+		// 	let roles = token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
+
+		// 	if (guardRoles.some(function (v) {
+		// 		// console.log("Roles:"+ v);
+		// 		if (roles.indexOf(v) >= 0) {
+		// 			return true;
+		// 		}
+		// 	})) {
+		// 		result = true;
+		// 	}
+		// });
+
+		
+	}
 	// ** TOKEN HEADERS SERVICE CALL ** //  
 	public getBusinessClassById(id: number): Observable<DWXF7BusinessClass[]> {
-		
+
 		this._http.options('withCredentials: true');
 		return this._http.get(this._url + 'ProxyGetAllBusinessClass')
-		//.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
-		.map((response: Response) => response) //<-- with httpclient
-		.do(data => console.log('Return Data: ' + JSON.stringify(data)))
-		.catch(this.handleError);
+			//.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
+			.map((response: Response) => response) //<-- with httpclient
+			.do(data => console.log('Return Data: ' + JSON.stringify(data)))
+			.catch(this.handleError);
 	}
 
 	//
 	public postNewBusinessClass(newClass: any): Observable<any> {
-		
+
 		this._http.options('withCredentials: true');
 		return this._http.post(this._url + 'ProxyPostCall', newClass)
 			//.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
@@ -106,7 +152,7 @@ export class AuthService {
 	//
 	private handleError(error: Response) {
 		//console.error('handle Error: ', JSON.stringify(error.toString()));
-		console.error('handle Error: '+ error.toString());
+		console.error('handle Error: ' + error.toString());
 		return Observable.throw(error.toString() || 'Server error');
 	}
 
