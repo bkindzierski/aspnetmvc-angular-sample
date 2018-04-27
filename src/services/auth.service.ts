@@ -2,8 +2,8 @@
 import { EventEmitter, Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from '@angular/common';
 //import { HttpClient, HttpClientModule, HttpHeaders } from "@angular/common/http";
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { HttpClient, HttpClientModule, HttpRequest } from '@angular/common/http';
+//import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpClientModule, HttpRequest,HttpHeaders } from '@angular/common/http';
 
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
@@ -29,9 +29,9 @@ export class AuthService {
 
 
 	constructor(private _http: HttpClient,
-		@Inject(PLATFORM_ID) private platformId: any) {
+		@Inject(PLATFORM_ID) private platformId: any,
+		private authService: AuthService) {
 	}
-
 
 	// performs the logout
 	logout(): boolean {
@@ -80,16 +80,7 @@ export class AuthService {
 		return false;
 	}
 
-	parseJwt(token) {
-		//var base64Url = token[1];
-		console.log("token:" + token);
-		var base64Url = (<string>token).split('.')[1];
-		// console.log(base64Url);
-		var base64 = base64Url.replace('-', '+').replace('_', '/');
-		//  console.log("final:"+base64);
-		return JSON.parse(window.atob(base64));
-	};
-
+	//
 	public isInRole(guardRoles: Array<string>): boolean {
 		let result: boolean = false;
 		let token = this.getAuth();
@@ -104,30 +95,23 @@ export class AuthService {
 		})) {
 			result = true;
 		}
-
 		//
 		return result;
-
-		
-		// this.tokenStorage.getAccessToken().subscribe(data => {
-		// 	// console.log("testtoken"+data)
-		// 	let token = this.parseJwt(data);
-
-		// 	let roles = token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
-
-		// 	if (guardRoles.some(function (v) {
-		// 		// console.log("Roles:"+ v);
-		// 		if (roles.indexOf(v) >= 0) {
-		// 			return true;
-		// 		}
-		// 	})) {
-		// 		result = true;
-		// 	}
-		// });
-
-		
 	}
-	// ** TOKEN HEADERS SERVICE CALL ** //  
+
+	//
+	parseJwt(token) {
+		//var base64Url = token[1];
+		console.log("parse-token:" + token);
+		var base64Url = (<string>token).split('.')[1];
+		// console.log(base64Url);
+		var base64 = base64Url.replace('-', '+').replace('_', '/');
+		//  console.log("final:"+base64);
+		return JSON.parse(window.atob(base64));
+	};
+
+
+	// ** TOKEN HEADERS GET TEST SERVICE CALL ** //  
 	public getBusinessClassById(id: number): Observable<DWXF7BusinessClass[]> {
 
 		this._http.options('withCredentials: true');
@@ -138,7 +122,7 @@ export class AuthService {
 			.catch(this.handleError);
 	}
 
-	//
+	// ** TOKEN HEADERS POST TEST SERVICE CALL ** //  
 	public postNewBusinessClass(newClass: any): Observable<any> {
 
 		this._http.options('withCredentials: true');
