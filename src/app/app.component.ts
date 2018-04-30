@@ -1,7 +1,10 @@
 import { Component, Input, ElementRef, Injectable, Inject } from '@angular/core';
-import {AuthService } from '../services/auth.service';
+import { Services } from '@angular/core/src/view';
 
+import { AuthService } from '../services/auth.service';
 import { DWXF7BusinessClass } from '../classes/DWXF7BusinessClass';
+import { BusinessclassDataService } from '../services/businessclass-data.service';
+
 
 export class UserData {
     //
@@ -45,12 +48,14 @@ export class AppComponent {
     token: TokenReponse
 
     constructor(private elementRef: ElementRef, 
-                private authService: AuthService) {
+				private authService: AuthService,
+				private classService : BusinessclassDataService) {
 
         //@ViewChild('username') this.username:  ElementRef; 
         //this.username = this.elementRef.nativeElement.getAttribute('username');
         //this.quoteid  = this.elementRef.nativeElement.getAttribute('quoteid');
         //var qid = parseFloat((<HTMLInputElement>document.getElementById('quoteid')).value);
+
 
 		if (<HTMLInputElement>document.getElementById('userdata') != null) {
 			var userdata = (<HTMLInputElement>document.getElementById('userdata')).value;
@@ -77,7 +82,7 @@ export class AppComponent {
 	classInfoByid: DWXF7BusinessClass[];
 	public getBusinessClassID(id: number) {
 
-		this.authService.getBusinessClassById(id)
+		this.classService.getBusinessClassById(id)
 			.finally(() => this.ApiGetCheck())
 			.subscribe(classInfo => {
 				this.classInfoByid = classInfo;
@@ -145,7 +150,7 @@ export class AppComponent {
 		newClass.RCDID		= 25;
 
 		//
-		this.authService.postNewBusinessClass(newClass)
+		this.classService.postNewBusinessClass(newClass)
 			.finally(() => this.ApiPostCheck())
 			.subscribe(classInfo => {
 				this.classPostInfo = classInfo;

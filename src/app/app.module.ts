@@ -5,29 +5,31 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient,HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 import { AuthService } from '../services/auth.service';
 import { AuthInterceptor } from '../services/auth-interceptor.service';
-import {AppRoutingModule} from './app-routing.module';
+import { BusinessclassDataService } from '../services/businessclass-data.service';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-	  BrowserModule,
-	  RouterModule,
-	  HttpModule,
-    HttpClientModule,
-    AppRoutingModule
+		BrowserModule,
+		RouterModule,
+		HttpModule,
+		HttpClientModule,
+		AppRoutingModule
   ],
   providers: [
     AuthService, {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
-  ],
-  
+      multi: true,
+    },
+    BusinessclassDataService
+  ],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

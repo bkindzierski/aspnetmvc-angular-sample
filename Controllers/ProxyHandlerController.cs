@@ -49,10 +49,10 @@ namespace aspnetmvc_angular_sample.Controllers
 
 		[HttpGet]
 		[EnableCors("MyPolicy")]
-		//[Authorize(Roles = "Admin")]
+		[Authorize(Roles = "Admin")]
 		[Produces("application/json")]
 		[Route("api/ProxyGetAllBusinessClass")]
-		//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		public JsonResult ProxyGetAllBusinessClasses()
 		{	
 
