@@ -30,8 +30,7 @@ namespace aspnetmvc_angular_sample.Controllers
 
 		public HomeController(IConfiguration configuration)
         {
-			//RoleManager = roleManager;
-			//UserManager = userManager;
+			
 			Configuration = configuration;
 
 			// Instantiate a single JsonSerializerSettings object
@@ -106,7 +105,8 @@ namespace aspnetmvc_angular_sample.Controllers
                               new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                               new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString()),
 							  //add additional claims here
-							  new Claim(ClaimTypes.Role, "Admin")
+							  //new Claim(ClaimTypes.Role, "Admin")
+							  new Claim(ClaimTypes.Role, "UnderWriter")
 							  //new Claim(ClaimTypes.Authentication, "true")
 							  
 						};

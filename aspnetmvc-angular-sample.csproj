@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="src\classes\DWXF7BusinessClass.ts" />
+    <None Remove="src\classes\TokenResponse.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
   
   <ItemGroup>
     <TypeScriptCompile Include="src\classes\DWXF7BusinessClass.ts" />
+    <TypeScriptCompile Include="src\classes\TokenResponse.ts" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ import { HttpClient, HttpClientModule, HttpRequest, HttpHeaders } from '@angular
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 
-import { TokenReponse } from '../app/app.component';
+import { TokenReponse } from '../classes/TokenResponse';
 import { HttpResponse } from "selenium-webdriver/http";
 import { DWXF7BusinessClass } from '../classes/DWXF7BusinessClass';
 
@@ -72,11 +72,15 @@ export class AuthService {
 	public isInRole(guardRoles: Array<string>): boolean {
 		let result: boolean = false;
 		let token = this.getAuth();
-		let parseToken = this.parseJwt(token)
+		if (token == null) { return false;}
 
-		let roles = token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
+		let parseToken = this.parseJwt(token.token);
+
+		let roles = parseToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
+		console.log('Token roles: ' + roles);
+
 		if (guardRoles.some(function (v) {
-			// console.log("Roles:"+ v);
+			console.log("IsInRoles: "+ v);
 			if (roles.indexOf(v) >= 0) {
 				return true;
 			}
@@ -87,10 +91,10 @@ export class AuthService {
 		return result;
 	}
 
-	//
+	//TypeError: t.split is not a function
 	parseJwt(token) {
 		//var base64Url = token[1];
-		console.log("parse-token:" + token);
+		console.log("AuthService Parsed token: " + token);
 		var base64Url = (<string>token).split('.')[1];
 		// console.log(base64Url);
 		var base64 = base64Url.replace('-', '+').replace('_', '/');

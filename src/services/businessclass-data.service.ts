@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import 'rxjs/Rx';
 
 import { AuthService } from './auth.service';
-import { TokenReponse } from '../app/app.component';
+import { TokenReponse } from '../classes/TokenResponse';
 import { HttpResponse } from "selenium-webdriver/http";
 import { DWXF7BusinessClass } from '../classes/DWXF7BusinessClass';
 

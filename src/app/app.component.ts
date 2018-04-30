@@ -2,6 +2,7 @@ import { Component, Input, ElementRef, Injectable, Inject } from '@angular/core'
 import { Services } from '@angular/core/src/view';
 
 import { AuthService } from '../services/auth.service';
+import { TokenReponse } from '../classes/TokenResponse';
 import { DWXF7BusinessClass } from '../classes/DWXF7BusinessClass';
 import { BusinessclassDataService } from '../services/businessclass-data.service';
 
@@ -17,18 +18,18 @@ export class UserData {
     public QuoteId:     string
 }
 
- export class TokenReponse {
-    //
-    public UserId: string
-    public SessionId: string
-    public Email: string
-    public UserName: string
-    public APSubjectId: string
-    public APGroupId: string
-    public QuoteId: string
-    public token: string
-    public expiration: string
-}
+// export class TokenReponse {
+//    //
+//    public UserId: string
+//    public SessionId: string
+//    public Email: string
+//    public UserName: string
+//    public APSubjectId: string
+//    public APGroupId: string
+//    public QuoteId: string
+//    public token: string
+//    public expiration: string
+//}
 
 
 

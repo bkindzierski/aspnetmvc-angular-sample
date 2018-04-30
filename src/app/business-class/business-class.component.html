@@ -1,0 +1,27 @@
+<p>
+  business-class works!
+</p>
+
+<div class='table-responsive'>
+  <table class='table' *ngIf='classInfoByid && classInfoByid.length'>
+      <thead>
+          <tr>
+              <th>RCDID</th>
+              <th>CLASX</th>
+              <th>DESC</th>
+              <th>EFFDTE</th>
+              <th>ENDDTE</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor='let data of classInfoByid'>
+             
+              <td> {{ data.RCDID }} </td>
+              <td>{{ data.CLASX }}</td>
+              <td>{{ data.DESC }}</td>
+              <td>{{ data.EFFDTE }}</td>
+              <td>{{ data.ENDDTE }}</td>                        
+          </tr>
+      </tbody>
+  </table>
+</div>

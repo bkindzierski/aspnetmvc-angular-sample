@@ -1,0 +1,8 @@
+.col-xs-6 {
+    width: 50%;
+    float: left;
+}
+.container-fluid {
+	width: 100%;
+	clear: both;
+}
