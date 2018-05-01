@@ -1,7 +1,7 @@
 import { Component, Input, ElementRef, Injectable, Inject } from '@angular/core';
 import { Services } from '@angular/core/src/view';
 
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { TokenReponse } from '../classes/TokenResponse';
 import { DWXF7BusinessClass } from '../classes/DWXF7BusinessClass';
 import { BusinessclassDataService } from '../services/businessclass-data.service';

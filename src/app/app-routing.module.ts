@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { BusinessClassComponent } from '../../src/app/business-class/business-class.component';
 import { ErrorRedirectComponent } from '../../src/app/error-redirect/error-redirect.component';
 

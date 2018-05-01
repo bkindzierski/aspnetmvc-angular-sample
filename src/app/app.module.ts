@@ -7,9 +7,10 @@ import { HttpClientModule, HttpClient,HTTP_INTERCEPTORS } from '@angular/common/
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AuthGuard } from './auth.guard';
-import { AuthService } from '../services/auth.service';
-import { AuthInterceptor } from '../services/auth-interceptor.service';
+import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
+import { AuthInterceptor } from '../auth/auth-interceptor.service';
+
 import { BusinessclassDataService } from '../services/businessclass-data.service';
 import { BusinessClassComponent } from './business-class/business-class.component';
 import { ErrorRedirectComponent } from './error-redirect/error-redirect.component';
