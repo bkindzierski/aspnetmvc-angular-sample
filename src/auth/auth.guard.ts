@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
     // Get property name on security object to check
     let roles = next.data["roles"] as Array<string>;
-    console.log("Roles in Route module:" + roles);
+    //console.log("Roles in Route module:" + roles);
 
     if (roles != null) {
       if (!this.authService.isInRole(roles)) {

@@ -18,20 +18,6 @@ export class UserData {
     public QuoteId:     string
 }
 
-// export class TokenReponse {
-//    //
-//    public UserId: string
-//    public SessionId: string
-//    public Email: string
-//    public UserName: string
-//    public APSubjectId: string
-//    public APGroupId: string
-//    public QuoteId: string
-//    public token: string
-//    public expiration: string
-//}
-
-
 
 @Component({
   selector: 'app-root',
@@ -76,12 +62,13 @@ export class AppComponent {
 		}
         
         authService.setAuth(this.token);
+
 		//
-		document.getElementById('userdata').remove();
+		//document.getElementById('userdata').remove();
 
 	}
 
-	// ** ** BDK
+	// ** ** 
 	classInfoByid: DWXF7BusinessClass[];
 	public getBusinessClassID(id: number) {
 

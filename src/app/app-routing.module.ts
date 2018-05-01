@@ -15,9 +15,9 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		data: { roles: ['Admin', 'User'] }
 	},
-	
-	{ path: 'unauthorized', component: ErrorRedirectComponent },
+
 	{ path: 'api/LansaAuthenticate', component: AppComponent },
+	{ path: 'unauthorized', component: ErrorRedirectComponent },
 	{ path: '~/', redirectTo: 'AppComponent', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'AppComponent', pathMatch: 'full' },
 	//children: []

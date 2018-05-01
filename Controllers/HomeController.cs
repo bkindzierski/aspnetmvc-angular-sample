@@ -94,26 +94,30 @@ namespace aspnetmvc_angular_sample.Controllers
 				// before issuing the token ** // 
 
 				//var identity = User.Identity as ClaimsIdentity;
-				
+				//// add the registered claims for JWT (RFC7519).
+				//var claims = new[] {
+				//			new Claim(JwtRegisteredClaimNames.Sub, user.UserId),
+				//			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				//			new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString()),
+				//			//add additional claims here
+				//			new Claim(ClaimTypes.Role, "Admin"),
+				//			new Claim(ClaimTypes.Role, "UnderWriter")
+				//			//new Claim(ClaimTypes.Authentication, "true")
+				//		};
 
-				// create and return the Jwt token.
-				DateTime now = DateTime.UtcNow;
-
-				//var userClaims = new List<Claim>();
-				//userClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
-				//userClaims.Add(new Claim(ClaimTypes.Role, "Users"));
 
 				// add the registered claims for JWT (RFC7519).
-				var claims = new[] {
-							new Claim(JwtRegisteredClaimNames.Sub, user.UserId),
-							new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-							new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString()),
-							//add additional claims here
-							new Claim(ClaimTypes.Role, "Admin"),
-							new Claim(ClaimTypes.Role, "UnderWriter")
-							//new Claim(ClaimTypes.Authentication, "true")
-							  
-						};
+				DateTime now = DateTime.UtcNow;
+
+				var userClaims = new List<Claim>();
+				userClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserId));
+				userClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+				userClaims.Add(new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString()));
+				//add additional claims here ->(loop thorugh lansa roles)
+				userClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
+				userClaims.Add(new Claim(ClaimTypes.Role, "Users"));
+				userClaims.Add(new Claim(ClaimTypes.Role, "UnderWriter"));
+
 
                 var tokenExpirationMins = Configuration.GetValue<int>("Auth:Jwt:TokenExpirationInMinutes");
                 var issuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:Key"]));
@@ -121,7 +125,7 @@ namespace aspnetmvc_angular_sample.Controllers
                 var token = new JwtSecurityToken(
                         issuer: Configuration["Auth:Jwt:Issuer"],
                         audience: Configuration["Auth:Jwt:Audience"],
-                        claims: claims,
+                        claims: userClaims,
                         //notBefore: now,
                         expires: now.Add(TimeSpan.FromMinutes(tokenExpirationMins)),
                         signingCredentials: new SigningCredentials(issuerSigningKey, SecurityAlgorithms.HmacSha256)

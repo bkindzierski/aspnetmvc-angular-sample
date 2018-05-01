@@ -70,34 +70,23 @@ export class AuthService {
 
 	//
 	public isInRole(guardRoles: Array<string>): boolean {
-
-		//guardRoles.forEach(function (value) {
-		//	console.log('guardRoles: ' + value);
-		//});
-		
+				
 		let result: boolean = false;
 		let token = this.getAuth();
-		//
 		if (token == null) { return false; }
 
 		let parseToken = this.parseJwt(token.token);
 		let roles = parseToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
-		console.log('Token roles: ' + roles);
 
-		//roles.forEach(function (value) {
-		//	console.log('token-roles: ' + value);
-		//});
-
-		if (guardRoles.some(function (v) {
-				console.log("IsInRoles: " + v);
-				if (roles.indexOf(v) >= 0) {
+		guardRoles.forEach(function (guard) {
+			roles.forEach(function (role) {
+				if (guard.trim() == role.trim()) {
+					result = true;
 					return true;
 				}
-			})
-		) 
-		{
-			result = true;
-		}
+			});
+			if (result == true) { return; }
+		});
 
 		//
 		return result;
@@ -106,7 +95,7 @@ export class AuthService {
 	//TypeError: t.split is not a function
 	parseJwt(token) {
 		//var base64Url = token[1];
-		console.log("AuthService Parsed token: " + token);
+		//console.log("AuthService Parsed token: " + token);
 		var base64Url = (<string>token).split('.')[1];
 		// console.log(base64Url);
 		var base64 = base64Url.replace('-', '+').replace('_', '/');
