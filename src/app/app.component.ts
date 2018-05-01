@@ -76,6 +76,8 @@ export class AppComponent {
 		}
         
         authService.setAuth(this.token);
+		//
+		document.getElementById('userdata').remove();
 
 	}
 

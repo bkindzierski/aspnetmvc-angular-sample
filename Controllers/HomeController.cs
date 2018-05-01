@@ -97,17 +97,21 @@ namespace aspnetmvc_angular_sample.Controllers
 				
 
 				// create and return the Jwt token.
-				DateTime now = DateTime.UtcNow;		
+				DateTime now = DateTime.UtcNow;
+
+				//var userClaims = new List<Claim>();
+				//userClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
+				//userClaims.Add(new Claim(ClaimTypes.Role, "Users"));
 
 				// add the registered claims for JWT (RFC7519).
 				var claims = new[] {
-                              new Claim(JwtRegisteredClaimNames.Sub, user.UserId),
-                              new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                              new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString()),
-							  //add additional claims here
-							  new Claim(ClaimTypes.Role, "Admin")
-							  //new Claim(ClaimTypes.Role, "UnderWriter")
-							  //new Claim(ClaimTypes.Authentication, "true")
+							new Claim(JwtRegisteredClaimNames.Sub, user.UserId),
+							new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+							new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString()),
+							//add additional claims here
+							new Claim(ClaimTypes.Role, "Admin"),
+							new Claim(ClaimTypes.Role, "UnderWriter")
+							//new Claim(ClaimTypes.Authentication, "true")
 							  
 						};
 

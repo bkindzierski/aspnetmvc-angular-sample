@@ -15,23 +15,23 @@ export class AuthInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler): Observable<HttpEvent<any>> {
 
-		var auth = this.injector.get(AuthService);
-		
-		console.log('auth.isLoggedIn(): ' + auth.isLoggedIn());
+        var auth = this.injector.get(AuthService);
 
-		var token = (auth.isLoggedIn()) ? auth.getAuth()!.token : null;
+        console.log('auth.isLoggedIn(): ' + auth.isLoggedIn());
 
-		console.log('Interceptor token: ' + token);
+        var token = (auth.isLoggedIn()) ? auth.getAuth()!.token : null;
 
-		//var p = new HttpParams();
-		//p.append('IsAuthenticated', 'true');
+        console.log('Interceptor token: ' + token);
+
+        //var p = new HttpParams();
+        //p.append('IsAuthenticated', 'true');
 
         if (token) {
             request = request.clone({
                 setHeaders: {
-					Authorization: `Bearer ${token}`
-				},
-				withCredentials: true
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials: true
             });
         }
         return next.handle(request);
