@@ -14,12 +14,14 @@ import { AuthInterceptor } from '../auth/auth-interceptor.service';
 import { BusinessclassDataService } from '../services/businessclass-data.service';
 import { BusinessClassComponent } from './business-class/business-class.component';
 import { ErrorRedirectComponent } from './error-redirect/error-redirect.component';
+import { LansaLoaderComponent } from './lansa-loader/lansa-loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BusinessClassComponent,
-    ErrorRedirectComponent
+    ErrorRedirectComponent,
+    LansaLoaderComponent
   ],
   imports: [
 		BrowserModule,

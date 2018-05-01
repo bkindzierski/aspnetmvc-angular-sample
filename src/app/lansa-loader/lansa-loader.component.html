@@ -1,0 +1,35 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class='col-xs-6'>
+			<h2>Here are some links to help you start: </h2>
+			<ul>
+				<li>
+					<h2>
+						<a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a>
+					</h2>
+				</li>
+				<li>
+					<!--<h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>-->
+					<h2>
+						<a style="cursor: pointer; text-decoration: underline; " rel="noopener" (click)="getBusinessClassID(3)">Http - Get Proxy w/Token AuthCheck</a>
+					</h2>
+				</li>
+				<li>
+					<!--<h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>-->
+					<h2>
+						<a style="cursor: pointer; text-decoration: underline; " rel="noopener" (click)="postNewBusinesClass()">Http - Post Proxy w/Token AuthCheck</a>
+					</h2>
+				</li>
+			</ul>
+		</div>
+		<div class="col-xs-6">
+			<ul>
+				<li>
+					<h2>
+						<a [routerLink]="['/classlist']" style="cursor: pointer; text-decoration: underline; " rel="noopener">Router Guard Test</a>
+					</h2>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

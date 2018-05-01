@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { AuthGuard } from '../auth/auth.guard';
-import { BusinessClassComponent } from '../../src/app/business-class/business-class.component';
-import { ErrorRedirectComponent } from '../../src/app/error-redirect/error-redirect.component';
+import { BusinessClassComponent } from '../app/business-class/business-class.component';
+import { ErrorRedirectComponent } from '../app/error-redirect/error-redirect.component';
+import { LansaLoaderComponent } from '../app/lansa-loader/lansa-loader.component';
 
 const routes: Routes = [
 
@@ -16,7 +17,8 @@ const routes: Routes = [
 		data: { roles: ['Admin', 'User'] }
 	},
 
-	{ path: 'api/LansaAuthenticate', component: AppComponent },
+	{ path: '', component: LansaLoaderComponent },
+	{ path: 'api/LansaAuthenticate', component: LansaLoaderComponent }, //<-- needed for angular-callback URL
 	{ path: 'unauthorized', component: ErrorRedirectComponent },
 	{ path: '~/', redirectTo: 'AppComponent', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'AppComponent', pathMatch: 'full' },

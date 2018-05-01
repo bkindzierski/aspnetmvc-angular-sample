@@ -46,10 +46,8 @@ export class AuthService {
 
 	// Retrieves the auth JSON object (or NULL if none)
 	getAuth(): TokenReponse | null {
-
-		//console.log('getAuth()....');
+		
 		if (isPlatformBrowser(this.platformId)) {
-
 			var i = localStorage.getItem(this.authKey);
 			//console.log('local storage get item: ' + i);
 			if (i) {
@@ -92,9 +90,9 @@ export class AuthService {
 		return result;
 	}
 
-	//TypeError: t.split is not a function
+	//
 	parseJwt(token) {
-		//var base64Url = token[1];
+		
 		//console.log("AuthService Parsed token: " + token);
 		var base64Url = (<string>token).split('.')[1];
 		// console.log(base64Url);
