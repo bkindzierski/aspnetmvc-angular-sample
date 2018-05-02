@@ -5,7 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { TokenReponse } from '../classes/TokenResponse';
 import { DWXF7BusinessClass } from '../classes/DWXF7BusinessClass';
 import { BusinessclassDataService } from '../services/businessclass-data.service';
-
+import { LansaLoaderComponent } from './lansa-loader/lansa-loader.component'
 
 export class UserData {
     //

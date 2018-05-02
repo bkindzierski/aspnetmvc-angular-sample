@@ -76,15 +76,25 @@ export class AuthService {
 		let parseToken = this.parseJwt(token.token);
 		let roles = parseToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as (Array<string>);
 
-		guardRoles.forEach(function (guard) {
-			roles.forEach(function (role) {
-				if (guard.trim() == role.trim()) {
-					result = true;
-					return true;
-				}
-			});
-			if (result == true) { return; }
-		});
+		 guardRoles.forEach(function (guard) {
+		 	roles.forEach(function (role) {
+		 		if (guard.trim() == role.trim()) {
+		 			result = true;
+		 			return true;
+		 		}
+		 	});
+		 	if (result == true) { return; }
+		 });
+
+
+		//if (guardRoles.some(function (v) {
+		//	// console.log("Roles:"+ v);
+		//	if (roles.indexOf(v) >= 0) {
+		//		return true;
+		//	}
+		//})) {
+		//	result = true;
+		//}
 
 		//
 		return result;

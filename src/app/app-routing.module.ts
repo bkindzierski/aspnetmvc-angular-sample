@@ -23,7 +23,6 @@ const routes: Routes = [
 	{ path: '~/', redirectTo: 'AppComponent', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'AppComponent', pathMatch: 'full' },
 	//children: []
-	
 ];
 
 @NgModule({
