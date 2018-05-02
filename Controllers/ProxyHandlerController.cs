@@ -51,8 +51,8 @@ namespace aspnetmvc_angular_sample.Controllers
 		[EnableCors("MyPolicy")]
 		[Produces("application/json")]
 		[Route("api/ProxyGetAllBusinessClass")]
-		[Authorize(Roles = "Admin")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+		//[Authorize(Roles = "Admin")]
+		//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		public JsonResult ProxyGetAllBusinessClasses()
 		{	
 
@@ -93,8 +93,8 @@ namespace aspnetmvc_angular_sample.Controllers
 		[EnableCors("MyPolicy")]
 		[Route("api/ProxyPostCall")]
 		[Produces("application/json")]
-		[Authorize(Roles = "Admin")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+		//[Authorize(Roles = "Admin")]
+		//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		//public JsonResult ProxyPostCall([FromBody] DWXF710 postdata)
 		public IActionResult ProxyPostCall([FromBody] DWXF710 postdata)
 		{

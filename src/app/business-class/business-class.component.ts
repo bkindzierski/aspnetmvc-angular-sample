@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { DWXF7BusinessClass } from '../../classes/DWXF7BusinessClass';
 import { BusinessclassDataService } from '../../services/businessclass-data.service';
-
+import { LansaLoaderComponent } from '../lansa-loader/lansa-loader.component';
 
 @Component({
   selector: 'app-business-class',

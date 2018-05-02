@@ -20,6 +20,7 @@ const routes: Routes = [
 	{ path: '', component: LansaLoaderComponent },
 	{ path: 'api/LansaAuthenticate', component: LansaLoaderComponent }, //<-- needed for angular-callback URL
 	{ path: 'unauthorized', component: ErrorRedirectComponent },
+
 	{ path: '~/', redirectTo: 'AppComponent', pathMatch: 'full' },
 	{ path: '**', redirectTo: 'AppComponent', pathMatch: 'full' },
 	//children: []
