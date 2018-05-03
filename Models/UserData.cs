@@ -8,9 +8,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace aspnetmvc_angular_sample.Models
 {
-    public class UserData : IdentityUser
+    public class UserData :IdentityUser
     {
-        //already in base class
+        //ALREADY in base class
         //public string Email { get; set; }
         //public string UserName { get; set; }
 
@@ -21,5 +21,6 @@ namespace aspnetmvc_angular_sample.Models
         public string APSubjectId { get; set; }
         public string APGroupId { get; set; }
         public string QuoteId { get; set; }
+
     }
 }

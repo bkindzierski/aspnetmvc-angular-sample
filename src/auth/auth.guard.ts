@@ -13,18 +13,19 @@ export class AuthGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    //// Get property name on security object to check
-    //let roles = next.data["roles"] as Array<string>;
-    ////console.log("Roles in App-Routing:" + roles);
+    // Get property name on security object to check
+    let roles = next.data["roles"] as Array<string>;
+    //console.log("Roles in App-Routing:" + roles);
 
-    //if (roles != null) {
-    //  if (!this.authService.isInRole(roles)) {
-    //    console.log("NOT Authorized");
+    if (roles != null) {
+      if (!this.authService.isInRole(roles)) {
+        console.log("NOT Authorized");
 
-    //    this.router.navigate(['unauthorized'], { queryParams: { returnUrl: state.url } });
-    //    return false;
-    //  }
-    //}
+        this.router.navigate(['unauthorized'], { queryParams: { returnUrl: state.url } });
+        return false;
+      }
+	}
+
     return true;
   }
 

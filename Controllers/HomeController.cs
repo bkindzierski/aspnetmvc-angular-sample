@@ -139,7 +139,7 @@ namespace aspnetmvc_angular_sample.Controllers
                     UserId      = user.UserId,
                     UserName    = user.UserName,
                     Email       = user.Email,
-                    SessionId   =  user.SessionId,
+                    SessionId   = user.SessionId,
                     APSubjectId = user.APGroupId,
                     APGroupId   = user.APGroupId, 
                     QuoteId     = user.QuoteId,

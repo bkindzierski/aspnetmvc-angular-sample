@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace aspnetmvc_angular_sample.Models
 {
-    [JsonObject(MemberSerialization.OptOut)]
+   
     public class TokenResponseViewModel : IdentityUser
     {
         public TokenResponseViewModel()
