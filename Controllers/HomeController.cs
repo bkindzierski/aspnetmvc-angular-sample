@@ -63,7 +63,7 @@ namespace aspnetmvc_angular_sample.Controllers
 			var identity = User.Identity as ClaimsIdentity;
 
 			// return a generic HTTP Status 500 (Server Error)
-			//if the client payload is invalid.
+			// if the client payload is invalid.
 			if (userData == null) return new StatusCodeResult(500);
 
             // 
