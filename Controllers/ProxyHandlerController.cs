@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using System.IO;
 using aspnetmvc_angular_sample.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace aspnetmvc_angular_sample.Controllers
 {
@@ -93,19 +94,24 @@ namespace aspnetmvc_angular_sample.Controllers
 		[EnableCors("MyPolicy")]
 		[Route("api/ProxyPostCall")]
 		[Produces("application/json")]
-		[Authorize(Roles = "Admin")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+		//[Authorize(Roles = "Admin")]
+		//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		//public JsonResult ProxyPostCall([FromBody] DWXF710 postdata)
-		public IActionResult ProxyPostCall([FromBody] DWXF710 postdata)
+		//public IActionResult ProxyPostCall([FromBody] DWXF710 postdata)
+		public JsonResult ProxyPostCall([FromBody] object postdata)
 		{
 
 			try {
+
+				 
 				var token = this.HttpContext.Request.Headers["Authorization"];
+				string requestPath = (string)this.HttpContext.Request.Headers["RequestPath"];
+								
 
-				JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
-				string json = JsonConvert.SerializeObject(postdata, settings);
+				JsonSerializerSettings settings = new JsonSerializerSettings{ Formatting = Formatting.Indented };
+				string json = JsonConvert.SerializeObject(postdata, Formatting.Indented, settings);
 
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://dev-net-brn.MIG.local/MigAuthService/api/ProxyPostCall");
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://dev-net-brn.MIG.local/MigAuthService/" + requestPath);
 				request.Method = "POST";
 				request.ContentLength = json.Length;
 				request.ContentType = "application/json";
@@ -114,26 +120,28 @@ namespace aspnetmvc_angular_sample.Controllers
 				StreamWriter requestWriter = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII);
 				requestWriter.Write(json);
 				requestWriter.Close();
-
-				//dynamic obj 
-				//HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-				//StreamReader reader = new StreamReader(response.GetResponseStream());
-				//dynamic jsonresult = JsonConvert.DeserializeObject(reader.ReadToEnd());
-				//return Json(jsonresult, settings);
-
-				DWXF710 businessClass = new DWXF710();
+				
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				StreamReader reader = new StreamReader(response.GetResponseStream());
-				businessClass = JsonConvert.DeserializeObject<DWXF710>(reader.ReadToEnd());
-				var jsonResponse = Json(businessClass, settings);
+				object jsonResponse = JsonConvert.DeserializeObject(reader.ReadToEnd());
+				return Json(jsonResponse, settings);
 
-				if (businessClass != null){
-					//turn Ok(200);
-					return jsonResponse;
-				}
-				else{
-					return NotFound();
-				}
+				//old way
+				//DWXF710 businessClass = new DWXF710();
+				//HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+				//StreamReader reader = new StreamReader(response.GetResponseStream());
+				//businessClass = JsonConvert.DeserializeObject<DWXF710>(reader.ReadToEnd());
+				//var jsonResponse = Json(businessClass, settings);
+
+				//if (businessClass != null)
+				//{
+				//	//turn Ok(200);
+				//	return jsonResponse;
+				//}
+				//else
+				//{
+				//	return NotFound();
+				//}
 
 			}
 			catch (Exception ex) {
@@ -141,5 +149,14 @@ namespace aspnetmvc_angular_sample.Controllers
 			}
 
 		}
-	}	
+	}
+	public class LowercaseContractResolver : DefaultContractResolver
+	{
+		protected override string ResolvePropertyName(string propertyName)
+		{
+			return propertyName.ToUpper();
+		}
+	}
+
 }
+

@@ -142,6 +142,7 @@ export class AppComponent {
 		//
 		this.classService.postNewBusinessClass(newClass)
 			.finally(() => this.ApiPostCheck())
+			.do(data => console.log('subscribe data: ' + JSON.stringify(data)))
 			.subscribe(classInfo => {
 				this.classPostInfo = classInfo;
 			});
