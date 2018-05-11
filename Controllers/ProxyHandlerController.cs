@@ -51,19 +51,20 @@ namespace aspnetmvc_angular_sample.Controllers
 		[HttpGet]
 		[EnableCors("MyPolicy")]
 		[Produces("application/json")]
-		[Route("api/ProxyGetAllBusinessClass")]
+		[Route("api/ProxyGet")]
 		[Authorize(Roles = "Admin")]
 		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-		public JsonResult ProxyGetAllBusinessClasses()
+		public JsonResult ProxyGet()
 		{	
 
 			try
 			{
 				
-				var token = this.HttpContext.Request.Headers["Authorization"];				
+				var token = this.HttpContext.Request.Headers["Authorization"];
+				string requestPath = (string)this.HttpContext.Request.Headers["RequestPath"];
 
 				//back-end behind firewall api call 
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://dev-net-brn.MIG.local/MigAuthService/api/BusinessClass");
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://dev-net-brn.MIG.local/MigAuthService/" + requestPath);
 				request.Method = "GET";
 				request.ContentType = "application/json";
 				request.Headers.Add("Authorization", token);
@@ -94,9 +95,8 @@ namespace aspnetmvc_angular_sample.Controllers
 		[EnableCors("MyPolicy")]
 		[Route("api/ProxyPostCall")]
 		[Produces("application/json")]
-		//[Authorize(Roles = "Admin")]
-		//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-		//public JsonResult ProxyPostCall([FromBody] DWXF710 postdata)
+		[Authorize(Roles = "Admin")]
+		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		//public IActionResult ProxyPostCall([FromBody] DWXF710 postdata)
 		public JsonResult ProxyPostCall([FromBody] object postdata)
 		{
@@ -150,7 +150,7 @@ namespace aspnetmvc_angular_sample.Controllers
 
 		}
 	}
-	public class LowercaseContractResolver : DefaultContractResolver
+	public class UppercaseContractResolver : DefaultContractResolver
 	{
 		protected override string ResolvePropertyName(string propertyName)
 		{

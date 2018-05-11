@@ -32,25 +32,26 @@ export class BusinessclassDataService {
 	  // ** TOKEN HEADERS GET TEST SERVICE CALL ** //  
 	  public getBusinessClassById(id: number): Observable<DWXF7BusinessClass[]> {
 
-		this._http.options('withCredentials: true');
-		return this._http.get(this._url + 'ProxyGetAllBusinessClass')
-		  //.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
-		  .map((response: Response) => response) //<-- with httpclient
-		  .do(data => console.log('Return Data: ' + JSON.stringify(data)))
-		  .catch(this.handleError);
+		  const httpOptions = {
+			  headers: new HttpHeaders({
+				  'Content-Type': 'application/json',
+				  'RequestPath': 'api/ProxyGetAllBusinessClass'
+			  })
+		  };
+
+		   this._http.options('withCredentials: true');
+				return this._http.get(this._url + 'ProxyGet')
+				//.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
+				.map((response: Response) => response) //<-- with httpclient
+				.do(data => console.log('Return Data: ' + JSON.stringify(data)))
+				.catch(this.handleError);
 	  }
 
 
 	  // ** TOKEN HEADERS POST TEST SERVICE CALL ** //  
 	  public postNewBusinessClass(newClass: any): Observable<any> {
 
-			//let headers = new Headers({
-			//	'Content-Type': 'application/json',
-			//	'requestPath': 'api/ProxyPostCall'
-			//});
-			//var headers = new HttpHeaders();
-			//headers.append('Content-Type', 'application/json');
-
+		
 		  const httpOptions = {
 			  headers: new HttpHeaders({
 				  'Content-Type': 'application/json',
@@ -60,7 +61,6 @@ export class BusinessclassDataService {
 		  };
 			
 		  this._http.options('withCredentials: true');
-
 		  return this._http.post(this._url + 'ProxyPostCall', newClass, httpOptions)
 			//.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
 			.map((response: Response) => response) //<-- with httpclient
