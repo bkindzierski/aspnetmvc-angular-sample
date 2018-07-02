@@ -150,6 +150,7 @@ namespace aspnetmvc_angular_sample.Controllers
 
 		}
 	}
+
 	public class UppercaseContractResolver : DefaultContractResolver
 	{
 		protected override string ResolvePropertyName(string propertyName)

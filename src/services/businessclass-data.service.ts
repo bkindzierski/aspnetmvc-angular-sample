@@ -35,12 +35,12 @@ export class BusinessclassDataService {
 		  const httpOptions = {
 			  headers: new HttpHeaders({
 				  'Content-Type': 'application/json',
-				  'RequestPath': 'api/ProxyGetAllBusinessClass'
+				  'RequestPath': 'api/BusinessClass'
 			  })
 		  };
 
 		   this._http.options('withCredentials: true');
-				return this._http.get(this._url + 'ProxyGet')
+				return this._http.get(this._url + 'ProxyGet', httpOptions)
 				//.map(response => <DWXF7BusinessClass[]>response) //<-- with httpclient
 				.map((response: Response) => response) //<-- with httpclient
 				.do(data => console.log('Return Data: ' + JSON.stringify(data)))
