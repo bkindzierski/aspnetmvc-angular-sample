@@ -29,7 +29,7 @@ import { LansaLoaderComponent } from './lansa-loader/lansa-loader.component'
 
 export class AppComponent {
 
-    title = 'app';
+    title = 'BDK';
     quoteid: string;
     username: string;
     
