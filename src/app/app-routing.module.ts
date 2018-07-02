@@ -6,6 +6,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { BusinessClassComponent } from '../app/business-class/business-class.component';
 import { ErrorRedirectComponent } from '../app/error-redirect/error-redirect.component';
 import { LansaLoaderComponent } from '../app/lansa-loader/lansa-loader.component';
+import { CssPositionSampleComponent } from '../app/css-position-sample/css-position-sample.component';
 
 const routes: Routes = [
 
@@ -18,6 +19,7 @@ const routes: Routes = [
 	},
 
 	{ path: '', component: LansaLoaderComponent },
+	{ path: 'cssposition', component: CssPositionSampleComponent },
 	{ path: 'api/LansaAuthenticate', component: LansaLoaderComponent }, //<-- needed for angular-callback URL
 	{ path: 'unauthorized', component: ErrorRedirectComponent },
 

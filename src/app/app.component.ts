@@ -1,5 +1,6 @@
 import { Component, Input, ElementRef, Injectable, Inject } from '@angular/core';
 import { Services } from '@angular/core/src/view';
+import { Router } from "@angular/router";
 
 import { AuthService } from '../auth/auth.service';
 import { TokenReponse } from '../classes/TokenResponse';
@@ -36,7 +37,8 @@ export class AppComponent {
 
     constructor(private elementRef: ElementRef, 
 				private authService: AuthService,
-				private classService : BusinessclassDataService) {
+				private classService : BusinessclassDataService,
+				private router:Router) {
 
         //@ViewChild('username') this.username:  ElementRef; 
         //this.username = this.elementRef.nativeElement.getAttribute('username');
@@ -158,5 +160,10 @@ export class AppComponent {
 		console.log('CLASX: ' + this.classPostInfo.CLASX);
 		console.log('RCDID: ' + this.classPostInfo.RCDID);
 		console.log('DESC: ' + this.classPostInfo.DESC);
+	}
+
+	public CssPosition(){
+		console.log('In cssposition....')
+		this.router.navigate(['/cssposition']);
 	}
 }
