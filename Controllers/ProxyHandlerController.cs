@@ -49,6 +49,9 @@ namespace aspnetmvc_angular_sample.Controllers
 		}
 
 		[HttpGet]
+
+
+		
 		[EnableCors("MyPolicy")]
 		[Produces("application/json")]
 		[Route("api/ProxyGet")]
